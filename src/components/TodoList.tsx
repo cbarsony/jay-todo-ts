@@ -1,17 +1,34 @@
-import { useSelector } from 'react-redux';
-import { getFileredTodos } from '../store/selectors';
+import { useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getFilteredTodos } from '../store/selectors'
+import TodoItem from './TodoItem'
+import useApi from '../hooks/useApi'
+import todosSlice from '../store/todosSlice'
+import { Todo } from '../store/store'
 
-const TodoList = () => {
-    const todos = useSelector(getFileredTodos)
+function TodoList() {
+    const filteredTodos = useSelector(getFilteredTodos)
+    const dispatch = useDispatch()
+    const api = useApi()
+
+    const handleToggle = useCallback((todo: Todo) => {
+        api.put(`/todos/${todo.id}`, todo)
+            .then(response => {
+                dispatch(todosSlice.actions.updated(response.data))
+            })
+    }, [api, dispatch])
 
     return (
-        <div>{todos.map(todo => (
-            <div key={todo.id}>
-                <span>{todo.text} </span>
-                <span>{todo.is_completed ? 'completed' : 'pending'}</span>
-            </div>
-        ))}</div>
-    );
-};
+        <div>
+            {filteredTodos.map(todo => (
+                <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    onToggle={handleToggle}
+                />
+            ))}
+        </div>
+    )
+}
 
-export default TodoList;
+export default TodoList

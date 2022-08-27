@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import store from './store/store';
 import Todo from './components/Todo';
+import Login from './components/Login'
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -18,7 +19,7 @@ root.render(
           <Todo />
         </Route>
         <Route path="/login">
-          <div>Login</div>
+          <Login />
         </Route>
       </Switch>
     </Router>

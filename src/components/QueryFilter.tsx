@@ -1,18 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { useDebounce } from '../hooks/useDebounce'
-import queryFilterSlice from '../slices/querySlice'
-
-enum FILTER_STATE {
-    ALL = 'ALL',
-    COMPLETED = 'COMPLETED',
-    PENDING = 'PENDING',
-}
+import queryFilterSlice from '../store/querySlice'
 
 function QueryFilter() {
     const dispatch = useDispatch()
 
-    const [query, setQuery] = useDebounce('', (filterState: FILTER_STATE) => {
-        dispatch(queryFilterSlice.actions.changed(filterState))
+    const [query, setQuery] = useDebounce('', (filterValue) => {
+        dispatch(queryFilterSlice.actions.changed(filterValue))
     })
   
     return (

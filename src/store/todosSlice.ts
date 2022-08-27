@@ -1,27 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo } from '../store/store';
+import { Todo } from './store';
 
-const initialState = [
-    {
-        id: 1,
-        text: 'test todo',
-        is_completed: false,
-    },
-]
+//TODO: put back 'null' option later when App init will be needed!
+//const initialState = null as Array<Todo> | null
+const initialState = [] as Array<Todo>
 
 const todosSlice = createSlice({
     name: 'todos',
     initialState,
     reducers: {
-        loaded: (state, action: PayloadAction<Todo[]>) => {
+        loaded: (state, action) => {
             return action.payload;
         },
-        /* updated: (state, action) => {
+        updated: (state, action) => {
             return state.map(todo => todo.id === action.payload.id ? action.payload : todo);
         },
         cleared: () => {
             return [];
-        }, */
+        },
     },
     /* extraReducers: {
         'reset': (state, action) => {

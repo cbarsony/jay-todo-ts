@@ -1,12 +1,11 @@
-import { useState, useRef, MutableRefObject } from 'react'
+import { useState, useRef } from 'react'
 
-export const useDebounce = (value: string, callback: Function, delay = 500) : [string, Function] => {
+export const useDebounce = <T>(value: T, callback: (value: T) => any, delay = 500) : [T, (value: T) => void] => {
     const [debouncedValue, setDebouncedValue] = useState(value)
 
-    //const timeout: MutableRefObject<ReturnType<typeof setTimeout> | null> = useRef(null) HOW???
-    const timeout: any = useRef(null)
+    const timeout: any = useRef<NodeJS.Timeout | null>(null)
 
-    const setDebounce = (newValue: string) => {
+    const setDebounce = (newValue: T) => {
         setDebouncedValue(newValue)
         clearTimeout(timeout.current)
         timeout.current = setTimeout(() => {

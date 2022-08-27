@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from 'redux';
-import todosSlice from '../slices/todosSlice';
-//import filterSlice from '../slices/filterSlice';
-//import queryFilterSlice from '../slices/querySlice';
-//import userSlice from '../slices/userSlice';
+import todosSlice from './todosSlice';
+import filterSlice from '../store/filterSlice';
+import queryFilterSlice from '../store/querySlice';
+import userSlice from './userSlice';
 
 export interface Todo {
     id: number,
@@ -10,15 +10,17 @@ export interface Todo {
     is_completed: boolean,
 }
 
-export interface State {
+export type State = ReturnType<typeof reducer>
+
+/* export interface State {
     todos: Todo[],
-}
+} */
 
 const reducer = combineReducers({
     todos: todosSlice.reducer,
-    //filter: filterSlice.reducer,
-    //queryFilter: queryFilterSlice.reducer,
-    //user: userSlice.reducer,
+    filter: filterSlice.reducer,
+    queryFilter: queryFilterSlice.reducer,
+    user: userSlice.reducer,
 });
 
 export default createStore(reducer);
