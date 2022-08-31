@@ -13,7 +13,7 @@ export enum FILTER_ACTION {
     PENDING_OFF ='PENDING_OFF',
 }
 
-const filterSlice = createSlice({
+export const filterSlice = createSlice({
     name: 'filter',
     initialState: FILTER_STATE.ALL,
     reducers: {
@@ -59,6 +59,3 @@ const filterSlice = createSlice({
         },
     },
 })
-
-export default filterSlice
-

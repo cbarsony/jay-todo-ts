@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import useApi from '../hooks/useApi'
+import { useApi } from '../hooks/useApi'
 
 const Logout = () => {
     const api = useApi()

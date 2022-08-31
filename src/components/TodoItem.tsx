@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { Todo } from '../store/store'
+import { useCallback } from 'react'
+import { Todo } from '../store'
 
 function TodoItem({todo, onToggle}: {todo: Todo, onToggle: (todo: Todo) => void}) {
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

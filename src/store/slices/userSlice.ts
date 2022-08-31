@@ -1,8 +1,9 @@
-import { createSlice, createAction } from '@reduxjs/toolkit'
+//import { createSlice, createAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-const reset = createAction('reset')
+//const reset = createAction('reset')
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
     name: 'user',
     initialState: null,
     reducers: {
@@ -14,5 +15,3 @@ const userSlice = createSlice({
         }
     }, */
 })
-
-export default userSlice

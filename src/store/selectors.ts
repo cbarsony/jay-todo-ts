@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { State } from './store'; 
+import { State } from '.'; 
 
 const getTodos = (state: State) => state.todos
 export const getFilter = (state: State) => state.filter

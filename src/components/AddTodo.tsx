@@ -1,8 +1,7 @@
-import { Http2ServerResponse } from 'http2'
 import React, { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import useApi from '../hooks/useApi'
-import todosSlice from '../store/todosSlice'
+import { useApi } from '../hooks/useApi'
+import { todosSlice } from '../store/slices/todosSlice'
 
 function AddTodo() {
     const [todoText, setTodoText] = useState('')

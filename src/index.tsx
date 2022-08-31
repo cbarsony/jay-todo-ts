@@ -1,9 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import store from './store/store';
-import Todo from './components/Todo';
+import store from './store';
+import TodoApp from './components/TodoApp';
 import Login from './components/Login'
 import './index.css';
 
@@ -16,7 +15,7 @@ root.render(
     <Router>
       <Switch>
         <Route exact path="/">
-          <Todo />
+          <TodoApp />
         </Route>
         <Route path="/login">
           <Login />

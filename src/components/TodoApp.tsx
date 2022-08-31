@@ -1,7 +1,7 @@
+import { useInit } from '../hooks/useInit'
 import TodoList from './TodoList'
 import QueryFilter from './QueryFilter'
 import AddTodo from './AddTodo'
-import useInit from '../hooks/useInit'
 import TodoManager from './TodoManager'
 import Logout from './Logout'
 

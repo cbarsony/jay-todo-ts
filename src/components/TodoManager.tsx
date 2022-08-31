@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import filterSlice from '../store/filterSlice'
-import { FILTER_ACTION } from '../store/filterSlice'
+import { filterSlice } from '../store/slices/filterSlice'
+import { FILTER_ACTION } from '../store/slices/filterSlice'
 import { getFilter } from '../store/selectors'
 
 function TodoManager() {

@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getFilteredTodos } from '../store/selectors'
+import { useApi } from '../hooks/useApi'
+import { todosSlice } from '../store/slices/todosSlice'
+import { Todo } from '../store'
 import TodoItem from './TodoItem'
-import useApi from '../hooks/useApi'
-import todosSlice from '../store/todosSlice'
-import { Todo } from '../store/store'
 
 function TodoList() {
     const filteredTodos = useSelector(getFilteredTodos)

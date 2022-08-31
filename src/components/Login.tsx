@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import useAuth from '../hooks/useAuth'
-import useApi from '../hooks/useApi'
-import useToast from '../hooks/useToast'
-import userSlice from '../store/userSlice'
+import { useAuth } from '../hooks/useAuth'
+import { useApi } from '../hooks/useApi'
+import { useToast } from '../hooks/useToast'
+import { userSlice } from '../store/slices/userSlice'
 
 const Login = () => {
     const [username, setUsername] = useState('user1')

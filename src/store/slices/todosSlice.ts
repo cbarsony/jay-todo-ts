@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo } from './store';
+import { createSlice } from '@reduxjs/toolkit';
+import { Todo } from '..';
 
 //TODO: put back 'null' option later when App init will be needed!
 //const initialState = null as Array<Todo> | null
 const initialState = [] as Array<Todo>
 
-const todosSlice = createSlice({
+export const todosSlice = createSlice({
     name: 'todos',
     initialState,
     reducers: {
@@ -24,6 +24,4 @@ const todosSlice = createSlice({
             return null;
         }
     }, */
-});
-
-export default todosSlice;
+})

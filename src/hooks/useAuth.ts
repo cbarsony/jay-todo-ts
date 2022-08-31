@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import useApi from '../hooks/useApi'
-import userSlice from '../store/userSlice'
+import { useApi } from '../hooks/useApi'
+import { userSlice } from '../store/slices/userSlice'
 import { getUser } from '../store/selectors'
 
-const useAuth = () => {
+export const useAuth = () => {
     const dispatch = useDispatch()
     const api = useApi()
     const user = useSelector(getUser)
@@ -25,5 +25,3 @@ const useAuth = () => {
     const isReady = user !== null
     return isReady
 }
-
-export default useAuth

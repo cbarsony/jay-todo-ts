@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import useApi from '../hooks/useApi'
-import todosSlice from '../store/todosSlice'
+import { useApi } from '../hooks/useApi'
+import { todosSlice } from '../store/slices/todosSlice'
 import { getFilteredTodos } from '../store/selectors'
 
-const useInit = () => {
+export const useInit = () => {
     const dispatch = useDispatch()
     const api = useApi()
     const todos = useSelector(getFilteredTodos)
@@ -25,5 +25,3 @@ const useInit = () => {
     const isReady = todos !== null
     return isReady
 }
-
-export default useInit

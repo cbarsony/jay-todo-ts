@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useDebounce } from '../hooks/useDebounce'
-import queryFilterSlice from '../store/querySlice'
+import { queryFilterSlice } from '../store/slices/querySlice'
 
 function QueryFilter() {
     const dispatch = useDispatch()

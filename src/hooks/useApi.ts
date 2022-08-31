@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
-import useToast from './useToast'
+import { useToast } from './useToast'
 
-const useApi = () => {
+export const useApi = () => {
   const toast = useToast()
   const history = useHistory()
   const api = useMemo(() => {
@@ -26,5 +26,3 @@ const useApi = () => {
 
   return api
 }
-
-export default useApi
