@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export enum FILTER_STATE {
-    ALL = 'ALL',
-    COMPLETED = 'COMPLETED',
-    PENDING = 'PENDING',
+    ALL,
+    COMPLETED,
+    PENDING,
 }
 
 export enum FILTER_ACTION {
-    COMPLETED_ON = 'COMPLETED_ON',
-    COMPLETED_OFF = 'COMPLETED_OFF',
-    PENDING_ON = 'PENDING_ON',
-    PENDING_OFF ='PENDING_OFF',
+    COMPLETED_ON,
+    COMPLETED_OFF,
+    PENDING_ON,
+    PENDING_OFF,
 }
 
 export const filterSlice = createSlice({
@@ -20,7 +20,7 @@ export const filterSlice = createSlice({
         changed: (state, action) => {
             switch(state) {
     
-                case 'ALL':
+                case FILTER_STATE.ALL:
                     if(action.payload === FILTER_ACTION.COMPLETED_OFF) {
                         return FILTER_STATE.PENDING
                     }
@@ -31,7 +31,7 @@ export const filterSlice = createSlice({
                         return state
                     }
         
-                case 'COMPLETED':
+                case FILTER_STATE.COMPLETED:
                     if(action.payload === FILTER_ACTION.COMPLETED_OFF) {
                         return FILTER_STATE.PENDING
                     }
@@ -42,7 +42,7 @@ export const filterSlice = createSlice({
                         return state
                     }
         
-                case 'PENDING':
+                case FILTER_STATE.PENDING:
                     if(action.payload === FILTER_ACTION.COMPLETED_ON) {
                         return FILTER_STATE.ALL
                     }

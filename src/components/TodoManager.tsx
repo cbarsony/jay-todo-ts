@@ -1,15 +1,15 @@
 import { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { filterSlice } from '../store/slices/filterSlice'
-import { FILTER_ACTION } from '../store/slices/filterSlice'
+import { FILTER_ACTION, FILTER_STATE } from '../store/slices/filterSlice'
 import { getFilter } from '../store/selectors'
 
-function TodoManager() {
+const TodoManager = () => {
     const filter = useSelector(getFilter)
     const dispatch = useDispatch()
 
-    const is_completedChecked = filter === 'ALL' || filter === 'COMPLETED'
-    const isPendingChecked = filter === 'ALL' || filter === 'PENDING'
+    const is_completedChecked = filter === FILTER_STATE.ALL || filter === FILTER_STATE.COMPLETED
+    const isPendingChecked = filter === FILTER_STATE.ALL || filter === FILTER_STATE.PENDING
 
     const handleCompletedChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(filterSlice.actions.changed(e.target.checked ? FILTER_ACTION.COMPLETED_ON : FILTER_ACTION.COMPLETED_OFF))

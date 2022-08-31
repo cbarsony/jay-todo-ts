@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux'
 import { useDebounce } from '../hooks/useDebounce'
 import { queryFilterSlice } from '../store/slices/querySlice'
 
-function QueryFilter() {
+const QueryFilter = () => {
     const dispatch = useDispatch()
 
     const [query, setQuery] = useDebounce('', (filterValue) => {

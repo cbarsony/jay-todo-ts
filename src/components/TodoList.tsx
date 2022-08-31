@@ -6,7 +6,7 @@ import { todosSlice } from '../store/slices/todosSlice'
 import { Todo } from '../store'
 import TodoItem from './TodoItem'
 
-function TodoList() {
+const TodoList = () => {
     const filteredTodos = useSelector(getFilteredTodos)
     const dispatch = useDispatch()
     const api = useApi()

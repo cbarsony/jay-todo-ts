@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useApi } from '../hooks/useApi'
 import { todosSlice } from '../store/slices/todosSlice'
 
-function AddTodo() {
+const AddTodo = () => {
     const [todoText, setTodoText] = useState('')
     const api = useApi()
     const dispatch = useDispatch()
