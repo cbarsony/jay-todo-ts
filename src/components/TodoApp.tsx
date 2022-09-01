@@ -17,6 +17,6 @@ const TodoApp = () => {
             <TodoManager />
         </>
     ) : <div>loading...</div>
-};
+}
 
-export default TodoApp;
+export default TodoApp

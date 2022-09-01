@@ -22,6 +22,5 @@ export const useAuth = () => {
             })
         }, [api, dispatch, user, location.pathname])
 
-    const isReady = user !== null
-    return isReady
+    return !!user
 }

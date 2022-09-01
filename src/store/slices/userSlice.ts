@@ -9,9 +9,9 @@ export const userSlice = createSlice({
     reducers: {
         set: (state, action) => action.payload,
     },
-    /* extraReducers: {
-        [reset]: (state, action) => {
+    extraReducers: {
+        reset: (state, action) => {
             return null
         }
-    }, */
+    },
 })

@@ -3,25 +3,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useApi } from '../hooks/useApi'
 import { todosSlice } from '../store/slices/todosSlice'
-import { getFilteredTodos } from '../store/selectors'
+import { initSlice } from '../store/slices/initSlice'
+import { getInit } from '../store/selectors'
 
 export const useInit = () => {
     const dispatch = useDispatch()
     const api = useApi()
-    const todos = useSelector(getFilteredTodos)
+    const isInitialized = useSelector(getInit)
     const location = useLocation()
 
     useEffect(() => {
-        if(todos.length) {
+        if(isInitialized) {
             return
         }
 
-        api.get('/todos')
+        api.get('/todos?q=ing&state=pending')
             .then(response => {
                 dispatch(todosSlice.actions.loaded(response.data))
+                dispatch(initSlice.actions.setInitialized())
             })
-    }, [api, dispatch, todos, location.pathname])
+    }, [isInitialized, api, dispatch, location.pathname])
 
-    const isReady = todos !== null
-    return isReady
+    return isInitialized
 }
