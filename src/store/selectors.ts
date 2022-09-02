@@ -4,7 +4,7 @@ import { FILTER_STATE } from './slices/filterSlice'
 
 const getTodos = (state: State) => state.todos
 export const getFilter = (state: State) => state.filter
-const getQueryFilter = (state: State) => state.queryFilter
+export const getQueryFilter = (state: State) => state.queryFilter
 export const getUser = (state: State) => state.user
 export const getInit = (state: State) => state.isInitialized
 

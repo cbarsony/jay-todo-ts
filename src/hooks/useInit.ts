@@ -17,7 +17,7 @@ export const useInit = () => {
             return
         }
 
-        api.get('/todos?q=ing&state=pending')
+        api.get('/todos')
             .then(response => {
                 dispatch(todosSlice.actions.loaded(response.data))
                 dispatch(initSlice.actions.setInitialized())

@@ -1,27 +1,40 @@
-import { useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useApi } from '../hooks/useApi'
+import { FILTER_ACTION, FILTER_STATE, getNextFilterState } from '../store/slices/filterSlice'
+import { getFilter, getQueryFilter } from '../store/selectors'
+import { todosSlice } from '../store/slices/todosSlice'
 import { filterSlice } from '../store/slices/filterSlice'
-import { FILTER_ACTION, FILTER_STATE } from '../store/slices/filterSlice'
-import { getFilter } from '../store/selectors'
 
 const TodoManager = () => {
+    const [inputValueCompleted, setInputValueCompleted] = useState(true)
+    const [inputValuePending, setInputValuePending] = useState(true)
+
     const filter = useSelector(getFilter)
+    const queryFilter = useSelector(getQueryFilter)
     const dispatch = useDispatch()
-
-    const is_completedChecked = filter === FILTER_STATE.ALL || filter === FILTER_STATE.COMPLETED
-    const isPendingChecked = filter === FILTER_STATE.ALL || filter === FILTER_STATE.PENDING
-
-    const handleCompletedChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(filterSlice.actions.changed(e.target.checked ? FILTER_ACTION.COMPLETED_ON : FILTER_ACTION.COMPLETED_OFF))
-    }, [dispatch])
-
-    const handlePendingChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(filterSlice.actions.changed(e.target.checked ? FILTER_ACTION.PENDING_ON : FILTER_ACTION.PENDING_OFF))
-    }, [dispatch])
+    const api = useApi()
 
     const handleClearClick = useCallback(() => {
         dispatch({ type: 'todos/cleared' })
     }, [dispatch])
+
+    const onFilterChange = useCallback((filterAcion: FILTER_ACTION) => {
+        const nextFilterState = getNextFilterState(filter, filterAcion)
+
+        setInputValueCompleted(nextFilterState === FILTER_STATE.ALL || nextFilterState === FILTER_STATE.COMPLETED)
+        setInputValuePending(nextFilterState === FILTER_STATE.ALL || nextFilterState === FILTER_STATE.PENDING)
+
+        const queryParams = new URLSearchParams()
+        queryParams.append('state', nextFilterState)
+        queryFilter.length && queryParams.append('q', queryFilter)
+
+        api.get(`/todos?${queryParams.toString()}`)
+            .then(response => {
+                dispatch(todosSlice.actions.loaded(response.data))
+                dispatch(filterSlice.actions.changed(filterAcion))
+            })
+    }, [filter, queryFilter, api, dispatch])
 
     return (
         <div>
@@ -29,8 +42,8 @@ const TodoManager = () => {
                 <input
                     id="checkbox-completed"
                     type="checkbox"
-                    checked={is_completedChecked}
-                    onChange={handleCompletedChange}
+                    checked={inputValueCompleted}
+                    onChange={e => onFilterChange(e.target.checked ? FILTER_ACTION.COMPLETED_ON : FILTER_ACTION.COMPLETED_OFF)}
                 />
                 <label htmlFor="checkbox-completed">Completed</label>
             </div>
@@ -38,8 +51,8 @@ const TodoManager = () => {
                 <input
                     id="checkbox-pending"
                     type="checkbox"
-                    checked={isPendingChecked}
-                    onChange={handlePendingChange}
+                    checked={inputValuePending}
+                    onChange={e => onFilterChange(e.target.checked ? FILTER_ACTION.PENDING_ON : FILTER_ACTION.PENDING_OFF)}
                 />
                 <label htmlFor="checkbox-pending">Pending</label>
             </div>

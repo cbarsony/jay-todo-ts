@@ -1,7 +1,4 @@
-//import { createSlice, createAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-
-//const reset = createAction('reset')
 
 export const userSlice = createSlice({
     name: 'user',
@@ -10,8 +7,6 @@ export const userSlice = createSlice({
         set: (state, action) => action.payload,
     },
     extraReducers: {
-        reset: (state, action) => {
-            return null
-        }
+        reset: () => null
     },
 })
