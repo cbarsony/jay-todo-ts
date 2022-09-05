@@ -58,6 +58,12 @@ export const filterSlice = createSlice({
     name: 'filter',
     initialState: FILTER_STATE.ALL,
     reducers: {
-        changed: (state, action) => getNextFilterState(state, action.payload),
+        changed: (state, action) => {
+            const nextState = getNextFilterState(state, action.payload)
+            return nextState
+        },
+        set: (state, action) => {
+            return action.payload
+        },
     },
 })
