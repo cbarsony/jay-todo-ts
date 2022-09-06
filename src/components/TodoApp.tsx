@@ -1,4 +1,6 @@
 import { useInit } from '../hooks/useInit'
+import { useUrlParamsListener } from '../hooks/useUrlParamsListener'
+import { useFilterListener } from '../hooks/useFilterListener'
 import TodoList from './TodoList'
 import QueryFilter from './QueryFilter'
 import AddTodo from './AddTodo'
@@ -7,6 +9,8 @@ import Logout from './Logout'
 
 const TodoApp = () => {
     const init = useInit()
+    useUrlParamsListener()
+    useFilterListener()
 
     return init ? (
         <>

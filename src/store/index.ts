@@ -1,10 +1,9 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, compose } from 'redux'
 import { todosSlice } from './slices/todosSlice'
-import { filterSlice } from './slices/filterSlice'
-import { queryFilterSlice } from './slices/querySlice'
+import { statusFilterSlice } from './slices/statusFilterSlice'
+import { queryFilterSlice } from './slices/queryFilterSlice'
 import { userSlice } from './slices/userSlice'
 import { initSlice } from './slices/initSlice'
-import { compose } from 'redux'
 
 export interface Todo {
     id: number,
@@ -16,7 +15,7 @@ export type State = ReturnType<typeof reducer>
 
 const reducer = combineReducers({
     todos: todosSlice.reducer,
-    filter: filterSlice.reducer,
+    statusFilter: statusFilterSlice.reducer,
     queryFilter: queryFilterSlice.reducer,
     user: userSlice.reducer,
     isInitialized: initSlice.reducer,

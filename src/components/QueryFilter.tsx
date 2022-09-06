@@ -1,25 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useApi } from '../hooks/useApi'
+import { useSelector } from 'react-redux'
 import { useDebounce } from '../hooks/useDebounce'
-import { queryFilterSlice } from '../store/slices/querySlice'
-import { getFilter } from '../store/selectors'
-import { todosSlice } from '../store/slices/todosSlice'
+import { getStatusFilter } from '../store/selectors'
+import { useHistory } from 'react-router-dom'
 
 const QueryFilter = () => {
-    const api = useApi()
-    const dispatch = useDispatch()
-    const filter = useSelector(getFilter)
+    const history = useHistory()
+    const filter = useSelector(getStatusFilter)
 
     const [query, setQuery] = useDebounce('', (filterValue) => {
         const queryParams = new URLSearchParams()
-        queryParams.append('state', filter)
+        queryParams.append('status', filter)
         filterValue.length && queryParams.append('q', filterValue)
 
-        api.get(`/todos?${queryParams.toString()}`)
-            .then(response => {
-                dispatch(todosSlice.actions.loaded(response.data))
-                dispatch(queryFilterSlice.actions.changed(filterValue))
-            })
+        history.push(`/?${queryParams.toString()}`)
     })
   
     return (

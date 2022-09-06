@@ -1,25 +1,25 @@
 import { createSelector } from 'reselect'
 import { State } from '.'
-import { FILTER_STATE } from './slices/filterSlice'
+import { STATUS_FILTER } from '../components/StatusFilter'
 
 const getTodos = (state: State) => state.todos
-export const getFilter = (state: State) => state.filter
+export const getStatusFilter = (state: State) => state.statusFilter
 export const getQueryFilter = (state: State) => state.queryFilter
 export const getUser = (state: State) => state.user
 export const getInit = (state: State) => state.isInitialized
 
 export const getFilteredTodos = createSelector(
-    [getTodos, getFilter, getQueryFilter],
-    (todos, filter, queryFilter) => todos.filter(todo => {
-        if(filter === FILTER_STATE.ALL) {
+    [getTodos, getStatusFilter, getQueryFilter],
+    (todos, statusFilter, queryFilter) => todos.filter(todo => {
+        if(statusFilter === STATUS_FILTER.ALL) {
             return true
         }
 
         if(todo.is_completed) {
-            return filter === FILTER_STATE.COMPLETED
+            return statusFilter === STATUS_FILTER.COMPLETED
         }
         else {
-            return filter === FILTER_STATE.PENDING
+            return statusFilter === STATUS_FILTER.PENDING
         }
     }).filter(todo => {
         return new RegExp(queryFilter, 'i').test(todo.text)
