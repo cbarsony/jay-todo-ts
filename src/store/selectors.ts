@@ -7,6 +7,7 @@ export const getStatusFilter = (state: State) => state.statusFilter
 export const getQueryFilter = (state: State) => state.queryFilter
 export const getUser = (state: State) => state.user
 export const getInit = (state: State) => state.isInitialized
+export const getPagination = (state: State) => state.paginagion
 
 export const getFilteredTodos = createSelector(
     [getTodos, getStatusFilter, getQueryFilter],
