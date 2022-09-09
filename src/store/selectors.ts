@@ -26,3 +26,17 @@ export const getFilteredTodos = createSelector(
         return new RegExp(queryFilter, 'i').test(todo.text)
     }),
 )
+
+export const getQueryParams = createSelector(
+    [getStatusFilter, getQueryFilter, getPagination],
+    (statusFilter, queryFilter, pagination) => {
+        const queryParams = {
+            status: statusFilter,
+            q: queryFilter,
+            skip: pagination.skip,
+            limit: pagination.limit,
+        }
+
+        return queryParams
+    }
+)

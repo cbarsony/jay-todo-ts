@@ -1,28 +1,20 @@
 import { useState, useCallback } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { getQueryFilter } from '../store/selectors'
+import { useMyHistory } from '../hooks/useMyHistory'
 import { StatusFilter, STATUS_FILTER } from './StatusFilter'
 
 const TodoManager = () => {
     const [statusFilter, setStatusFilter] = useState(STATUS_FILTER.ALL)
-    const queryFilter = useSelector(getQueryFilter)
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const myHistory = useMyHistory()
 
-    const handleClearClick = useCallback(() => {
+    const handleClearClick = () => {}
+    /* const handleClearClick = useCallback(() => {
         dispatch({ type: 'todos/cleared' })
-    }, [dispatch])
+    }, [dispatch]) */
 
-    const handleStatusFilterChange = useCallback((statusFilter: STATUS_FILTER) => {
-        setStatusFilter(statusFilter)
-
-        const queryParams = new URLSearchParams()
-        queryParams.append('status', statusFilter)
-        queryFilter?.length && queryParams.append('q', queryFilter)
-
-        history.push(`/?${queryParams.toString()}`)
-    }, [history, queryFilter])
+    const handleStatusFilterChange = useCallback((status: STATUS_FILTER) => {
+        setStatusFilter(status)
+        myHistory.push('/', {status})
+    }, [myHistory])
 
     return (
         <div>
