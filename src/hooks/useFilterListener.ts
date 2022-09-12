@@ -5,6 +5,6 @@ export const useFilterListener = () => {
     const todoSearch = useTodoSearch()
 
     useEffect(() => {
-        todoSearch()
+        todoSearch(true)
     }, [todoSearch])
 }

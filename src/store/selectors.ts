@@ -40,3 +40,25 @@ export const getQueryParams = createSelector(
         return queryParams
     }
 )
+
+export const getQueryParamsString = createSelector(
+    [getStatusFilter, getQueryFilter, getPagination],
+    (statusFilter, queryFilter, pagination) => {
+        const urlSearchParams = new URLSearchParams()
+
+        if(statusFilter) {
+            urlSearchParams.append('status', statusFilter)
+        }
+
+        if(queryFilter && queryFilter !== '') {
+            urlSearchParams.append('q', queryFilter)
+        }
+        
+        if(pagination.skip && pagination.limit) {
+            urlSearchParams.append('skip', pagination.skip)
+            urlSearchParams.append('limit', pagination.limit)
+        }
+
+        return urlSearchParams.toString()
+    }
+)
