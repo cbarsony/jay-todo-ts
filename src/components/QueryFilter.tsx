@@ -1,18 +1,11 @@
-import { useSelector } from 'react-redux'
 import { useDebounce } from '../hooks/useDebounce'
-import { getStatusFilter } from '../store/selectors'
-import { useHistory } from 'react-router-dom'
+import { useMyHistory } from '../hooks/useMyHistory'
 
 const QueryFilter = () => {
-    const history = useHistory()
-    const filter = useSelector(getStatusFilter)
+    const myHistory = useMyHistory()
 
-    const [query, setQuery] = useDebounce('', (filterValue) => {
-        const queryParams = new URLSearchParams()
-        queryParams.append('status', filter)
-        filterValue.length && queryParams.append('q', filterValue)
-
-        history.push(`/?${queryParams.toString()}`)
+    const [query, setQuery] = useDebounce('', q => {
+        myHistory.push('/', {q})
     })
   
     return (
